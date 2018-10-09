@@ -78,14 +78,13 @@ TARGET_LINK_LIBRARIES(SimpleViewerExample
   Qt5::Gui
   Qt5::Widgets
   Qt5::OpenGL
-  optimized ${OSG_LIBRARY} debug ${OSG_LIBRARY_DEBUG}
-  optimized ${OSGDB_LIBRARY} debug ${OSGDB_LIBRARY_DEBUG}
-  optimized ${OSGDB_LIBRARY} debug ${OSGDB_LIBRARY_DEBUG}
-  optimized ${OSGGA_LIBRARY} debug ${OSGGA_LIBRARY_DEBUG}
-  optimized ${OSGUTIL_LIBRARY} debug ${OSGUTIL_LIBRARY_DEBUG}
-  optimized ${OSGFX_LIBRARY} debug ${OSGFX_LIBRARY_DEBUG}
+  optimized ${OSG_LIBRARY}       debug ${OSG_LIBRARY_DEBUG}
+  optimized ${OSGDB_LIBRARY}     debug ${OSGDB_LIBRARY_DEBUG}
+  optimized ${OSGGA_LIBRARY}     debug ${OSGGA_LIBRARY_DEBUG}
+  optimized ${OSGUTIL_LIBRARY}   debug ${OSGUTIL_LIBRARY_DEBUG}
+  optimized ${OSGFX_LIBRARY}     debug ${OSGFX_LIBRARY_DEBUG}
   optimized ${OSGVIEWER_LIBRARY} debug ${OSGVIEWER_LIBRARY_DEBUG}
-  optimized ${OSGTEXT_LIBRARY} debug ${OSGTEXT_LIBRARY_DEBUG})
+  optimized ${OSGTEXT_LIBRARY}   debug ${OSGTEXT_LIBRARY_DEBUG})
 
 TARGET_INCLUDE_DIRECTORIES(SimpleViewerExample
   PRIVATE
