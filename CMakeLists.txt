@@ -1,4 +1,5 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 3.7.2)
+#CMAKE_MINIMUM_REQUIRED (VERSION 3.7.2)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.12.4)
 
 # Set a default build type if none was specified https://blog.kitware.com/cmake-and-the-default-build-type/
 set(default_build_type "Release")

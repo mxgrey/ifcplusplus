@@ -59,7 +59,7 @@ protected:
 #endif
 
 public:
-	ConverterOSG( shared_ptr<GeometrySettings>& geom_settings ) : m_geom_settings(geom_settings)
+  ConverterOSG( const shared_ptr<GeometrySettings>& geom_settings ) : m_geom_settings(geom_settings)
 	{
 		m_cull_back_off = new osg::CullFace( osg::CullFace::BACK );
 		m_glass_stateset = new osg::StateSet();
@@ -927,7 +927,7 @@ public:
 	/*\brief method convertToOSG: Creates geometry for OpenSceneGraph from given ProductShapeData.
 	\param[out] parent_group Group to append the geometry.
 	**/
-	void convertToOSG( const std::map<int, shared_ptr<ProductShapeData> >& map_shape_data, osg::ref_ptr<osg::Switch> parent_group )
+  void convertToOSG( const std::map<int, shared_ptr<ProductShapeData> >& map_shape_data, osg::ref_ptr<osg::Switch> parent_group )
 	{
 		progressTextCallback( L"Converting geometry to OpenGL format ..." );
 		progressValueCallback( 0, "scenegraph" );
@@ -1134,7 +1134,7 @@ public:
 		}
 	}
 
-	void resolveProjectStructure( const shared_ptr<ProductShapeData>& product_data, osg::ref_ptr<osg::Switch> group )
+  void resolveProjectStructure( const shared_ptr<ProductShapeData>& product_data, osg::ref_ptr<osg::Switch> group )
 	{
 		if( !product_data )
 		{

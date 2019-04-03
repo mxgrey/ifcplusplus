@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 3.7.2)
+CMAKE_MINIMUM_REQUIRED (VERSION 3.12.4)
 
 IF(NOT WIN32)
 IF(NOT CMAKE_BUILD_TYPE)
@@ -20,9 +20,19 @@ FIND_PACKAGE(Qt5Widgets REQUIRED)
 FIND_PACKAGE(Qt5OpenGL REQUIRED)
 ADD_DEFINITIONS(${Qt5Widgets_DEFINITIONS})
 
-FIND_PACKAGE(OpenSceneGraph REQUIRED osgDB osgUtil osgGA osgFX osgSim osgText osgViewer)
+#if()
+#  FIND_PACKAGE(OpenSceneGraph 3.5.4 REQUIRED osgDB osgUtil osgGA osgFX osgSim osgText osgViewer)
+#endif()
 
-SET(IFCPPVIEWER_SOURCE_FILES 
+#message("PKG_CONFIG_PATH:$ENV{PKG_CONFIG_PATH}")
+
+#include(FindPkgConfig)
+#pkg_check_modules(OSG REQUIRED IMPORTED_TARGET openscenegraph>=3.5.4)
+
+set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS TRUE)
+FIND_PACKAGE(OpenSceneGraph REQUIRED COMPONENTS osgUtil osgDB osgText osgGA osgFX osgSim osgViewer CONFIG)
+
+SET(IFCPPVIEWER_SOURCE_FILES
   src/IfcPlusPlusSystem.cpp
   src/main.cpp
   src/cmd/CmdRemoveSelectedObjects.cpp
@@ -65,12 +75,12 @@ ADD_EXECUTABLE(SimpleViewerExample
 
 set_target_properties(SimpleViewerExample PROPERTIES DEBUG_POSTFIX "d")
 
-If(UNIX)
-    # ON Debian Stretch with cmake 3.7.2 OPENTHREADS_LIBRARY_DEBUG is a not known variable
-    TARGET_LINK_LIBRARIES(SimpleViewerExample ${OPENTHREADS_LIBRARY})
-else(UNIX)
-    TARGET_LINK_LIBRARIES(SimpleViewerExample optimized ${OPENTHREADS_LIBRARY} debug ${OPENTHREADS_LIBRARY_DEBUG})
-ENDIF()
+#If(UNIX)
+#    # ON Debian Stretch with cmake 3.7.2 OPENTHREADS_LIBRARY_DEBUG is a not known variable
+#    TARGET_LINK_LIBRARIES(SimpleViewerExample ${OPENTHREADS_LIBRARY})
+#else(UNIX)
+#    TARGET_LINK_LIBRARIES(SimpleViewerExample optimized ${OPENTHREADS_LIBRARY} debug ${OPENTHREADS_LIBRARY_DEBUG})
+#ENDIF()
 
 TARGET_LINK_LIBRARIES(SimpleViewerExample
   IfcPlusPlus
@@ -78,25 +88,17 @@ TARGET_LINK_LIBRARIES(SimpleViewerExample
   Qt5::Gui
   Qt5::Widgets
   Qt5::OpenGL
-  optimized ${OSG_LIBRARY} debug ${OSG_LIBRARY_DEBUG}
-  optimized ${OSGDB_LIBRARY} debug ${OSGDB_LIBRARY_DEBUG}
-  optimized ${OSGDB_LIBRARY} debug ${OSGDB_LIBRARY_DEBUG}
-  optimized ${OSGGA_LIBRARY} debug ${OSGGA_LIBRARY_DEBUG}
-  optimized ${OSGUTIL_LIBRARY} debug ${OSGUTIL_LIBRARY_DEBUG}
-  optimized ${OSGFX_LIBRARY} debug ${OSGFX_LIBRARY_DEBUG}
-  optimized ${OSGVIEWER_LIBRARY} debug ${OSGVIEWER_LIBRARY_DEBUG}
-  optimized ${OSGTEXT_LIBRARY} debug ${OSGTEXT_LIBRARY_DEBUG})
+  ${OpenSceneGraph_TARGETS}
+)
+
+message("OSG_LIBRARIES:${OSG_LIBRARIES}")
+message("OSG_INCLUDE_DIRS:${OSG_INCLUDE_DIRS}")
 
 TARGET_INCLUDE_DIRECTORIES(SimpleViewerExample
   PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
-    ${OPENTHREADS_INCLUDE_DIR}
-    ${OSG_INCLUDE_DIR}
-    ${OSGGA_INCLUDE_DIR}
-    ${OSGDB_INCLUDE_DIR}
-    ${OSGUTIL_INCLUDE_DIR}
-    ${OSGANIMATION_INCLUDE_DIR}
-    ${OSGTEXT_INCLUDE_DIR})
+#    ${OPENTHREADS_INCLUDE_DIR}
+)
 
 INSTALL(
 		TARGETS SimpleViewerExample

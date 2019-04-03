@@ -41,7 +41,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OU
 ReaderSTEP::ReaderSTEP(){}
 ReaderSTEP::~ReaderSTEP(){}
 
-void ReaderSTEP::loadModelFromFile( const std::wstring& filePath, shared_ptr<BuildingModel>& targetModel )
+void ReaderSTEP::loadModelFromFile(const std::wstring& filePath, const shared_ptr<BuildingModel> &targetModel )
 {
 	// if file content needs to be loaded into a plain model, call resetModel() before loadModelFromFile
 	std::wstring ext = filePath.substr( filePath.find_last_of( L"." ) + 1 );
@@ -103,7 +103,7 @@ void ReaderSTEP::loadModelFromFile( const std::wstring& filePath, shared_ptr<Bui
 	loadModelFromString( buffer, targetModel);
 }
 
-void ReaderSTEP::loadModelFromString( std::string& content, shared_ptr<BuildingModel>& targetModel)
+void ReaderSTEP::loadModelFromString( std::string& content, const shared_ptr<BuildingModel>& targetModel)
 {
 	progressTextCallback( L"Reading file..." );
 	progressValueCallback( 0, "parse" );
@@ -177,7 +177,7 @@ void ReaderSTEP::removeComments( std::string& buffer )
 	buffer = buffer.substr( 0, length_without_comments );
 }
 
-void ReaderSTEP::readHeader( const std::string& read_in, shared_ptr<BuildingModel>& target_model )
+void ReaderSTEP::readHeader( const std::string& read_in, const shared_ptr<BuildingModel>& target_model )
 {
 	if( !target_model )
 	{
@@ -727,7 +727,7 @@ void ReaderSTEP::readEntityArguments( const BuildingModel::SchemaVersion& ifc_ve
 	}
 }
 
-void ReaderSTEP::readData( std::string& read_in, shared_ptr<BuildingModel>& model )
+void ReaderSTEP::readData( std::string& read_in, const shared_ptr<BuildingModel>& model )
 {
 	BuildingModel::SchemaVersion& file_schema_version = model->getIfcSchemaVersion();
 	std::map<int, shared_ptr<BuildingEntity> >& map_entities = model->m_map_entities;

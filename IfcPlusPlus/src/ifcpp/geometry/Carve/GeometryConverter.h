@@ -57,7 +57,7 @@ public:
 	std::map<int, shared_ptr<ProductShapeData> >&	getShapeInputData() { return m_product_shape_data; }
 	std::map<int, shared_ptr<BuildingObject> >&		getObjectsOutsideSpatialStructure() { return m_map_outside_spatial_structure; }
 
-	GeometryConverter( shared_ptr<BuildingModel>& ifc_model )
+  GeometryConverter( const shared_ptr<BuildingModel>& ifc_model )
 	{
 		m_ifc_model = ifc_model;
 		m_geom_settings = shared_ptr<GeometrySettings>( new GeometrySettings() );

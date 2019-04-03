@@ -27,15 +27,15 @@ public:
 	ReaderSTEP();
 	~ReaderSTEP();
 	virtual void removeComments( std::string& buffer );
-	virtual void readHeader(	const std::string& in, shared_ptr<BuildingModel>& target_model );
+  virtual void readHeader(const std::string& in, const shared_ptr<BuildingModel>& target_model );
 	virtual void readData( std::string& in, const BuildingModel::SchemaVersion& ifc_version, std::map<int, shared_ptr<BuildingEntity> >& map );
-	virtual void readData( std::string& in, shared_ptr<BuildingModel>& model );
+  virtual void readData(std::string& in, const shared_ptr<BuildingModel>& model );
 	
 	/*\brief Opens the given file, reads the content, and puts the entities into target_model.
 	  \param[in] file_path Absolute path of the file to read.
 	**/
-	virtual void loadModelFromFile( const std::wstring& file_path, shared_ptr<BuildingModel>& target_model );
-	virtual void loadModelFromString( std::string& content, shared_ptr<BuildingModel>& target_model );
+  virtual void loadModelFromFile( const std::wstring& file_path, const shared_ptr<BuildingModel>& target_model );
+  virtual void loadModelFromString(std::string& content, const shared_ptr<BuildingModel> &target_model );
 
 	void splitIntoStepLines(	const std::string& read_in, std::vector<std::string>& step_lines );
 	void readSingleStepLine(	const std::string& line, std::pair<std::string, shared_ptr<BuildingEntity> >& target_read_object );

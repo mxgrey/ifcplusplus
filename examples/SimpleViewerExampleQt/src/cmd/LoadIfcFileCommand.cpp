@@ -76,7 +76,7 @@ bool LoadIfcFileCommand::doCmd()
 		// in case there are IFC entities that are not in the spatial structure
 		const std::map<int, shared_ptr<BuildingObject> >& objects_outside_spatial_structure = geometry_converter->getObjectsOutsideSpatialStructure();
 		if( objects_outside_spatial_structure.size() > 0 )
-		{
+    {
 			osg::ref_ptr<osg::Switch> sw_objects_outside_spatial_structure = new osg::Switch();
 			sw_objects_outside_spatial_structure->setName( "IfcProduct objects outside spatial structure" );
 
